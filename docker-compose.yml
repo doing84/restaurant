@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  # myapp 웹 서비스
+  web-myapp:
+    build: .
+    container_name: django_web_myapp
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./myapp:/app/myapp
+    environment:
+      DEBUG: "1"
+      MYSQL_HOST: db-myapp
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: examplepassword
+      MYSQL_DATABASE: mydb
+    depends_on:
+      - db-myapp
+
+  # restaurant 웹 서비스
+  web-restaurant:
+    build: .
+    container_name: django_web_restaurant
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./restaurant:/app
+    environment:
+      DEBUG: "1"
+      MYSQL_HOST: db-restaurant
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: examplepassword
+      MYSQL_DATABASE: restaurantdb
+    depends_on:
+      - db-restaurant
+
+  # myapp용 DB
+  db-myapp:
+    build:
+      context: .
+      dockerfile: mysql.Dockerfile
+    container_name: mysql_db_myapp
+    environment:
+      MYSQL_ROOT_PASSWORD: examplepassword
+      MYSQL_DATABASE: mydb
+    volumes:
+      - mysql_data_myapp:/var/lib/mysql
+      - ./mysql/myapp.cnf:/etc/my.cnf
+    ports:
+      - "3307:3306"
+
+  # restaurant용 DB
+  db-restaurant:
+    build:
+      context: .
+      dockerfile: mysql.Dockerfile
+    container_name: mysql_db_restaurant
+    environment:
+      MYSQL_ROOT_PASSWORD: examplepassword
+      MYSQL_DATABASE: restaurantdb
+    volumes:
+      - mysql_data_restaurant:/var/lib/mysql
+      - ./mysql/restaurant.cnf:/etc/my.cnf
+    ports:
+      - "3308:3306"
+
+volumes:
+  mysql_data_myapp:
+  mysql_data_restaurant:
