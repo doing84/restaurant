@@ -18,3 +18,5 @@ class Restaurant(models.Model):
     created_at = models.DateTimeField(auto_now_add=True) 
 # 업데이트 시간 
     updated_at = models.DateTimeField(auto_now=True)
+# 방문자수
+    visitor_count = models.IntegerField(default=0, null=True, blank=True)

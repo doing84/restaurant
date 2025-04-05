@@ -1,0 +1,52 @@
+# ────────────────
+# Python 관련
+# ────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# 가상환경 (예: venv, env)
+env/
+venv/
+ENV/
+
+# IDE 및 에디터 관련
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# 로그 파일
+*.log
+
+# Django 관련
+db.sqlite3           # ← 만약 공유하고 싶으면 이 줄 삭제하거나 주석 처리
+*.sqlite3            # ← 모든 SQLite DB 공유하려면 이 줄도 지우기
+*.pyc                # 파이썬 컴파일 캐시
+
+# 마이그레이션 캐시
+**/migrations/__pycache__/
+
+# 환경변수 및 비밀키
+.env
+.env.*
+
+# Docker 관련
+*.pid
+*.seed
+*.bak
+*.swp
+docker-compose.override.yml
+docker-compose.local.yml
+
+# 빌드
+build/
+dist/
+*.egg-info/
+
+# macOS & Windows
+.DS_Store
+Thumbs.db
+

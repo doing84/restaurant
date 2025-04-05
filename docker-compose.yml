@@ -3,12 +3,14 @@ version: "3.8"
 services:
   # myapp 웹 서비스
   web-myapp:
-    build: .
+    build:
+      context: ./myapp
+      dockerfile: Dockerfile
     container_name: django_web_myapp
     ports:
       - "8000:8000"
     volumes:
-      - ./myapp:/app/myapp
+      - ./myapp:/app
     environment:
       DEBUG: "1"
       MYSQL_HOST: db-myapp
@@ -21,7 +23,9 @@ services:
 
   # restaurant 웹 서비스
   web-restaurant:
-    build: .
+    build:
+      context: ./restaurant
+      dockerfile: Dockerfile
     container_name: django_web_restaurant
     ports:
       - "8001:8000"
